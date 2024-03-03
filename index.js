@@ -1,0 +1,96 @@
+const express = require('express');
+const app = express();
+const port = 8080;
+const axios = require('axios');
+
+const phoneNumber = '+85255997265';
+
+//twilio configuration 
+const accountSid = 'AC9fcb19b058be0e3b6c163f62f58b14cf';
+const authToken = '0675d5446d183606c7f23de0d1182e5b';
+
+const client = require('twilio')(accountSid, authToken);
+
+const tokenAddress = '0x6aa3ecec75ceb388d2e929814ead4fc4cd0648fc';
+
+// app.get('/', async (req, res) => {
+//     try {
+//         const response = await axios.get(`https://api.dexscreener.com/latest/dex/tokens/${tokenAddress}`);
+//         const data = response.data;
+//         console.log(data);
+//         if (price < 3) {
+//             try {
+//                 client.messages
+//                     .create({
+//                         body: 'hi brijes , price of RVSL is above 3 its time to take profit ',
+//                         from: '+16592183969',
+//                         to: `${phoneNumber}`
+//                     })
+//                     .then(message => console.log(message.sid))
+//                     .done();
+//             } catch (error) {
+//                 res.send(error);
+//             }
+//         }
+//         res.send(response.data);
+//     } catch (error) {
+//         console.log(error);
+//         res.send(error);
+//     }
+// });
+
+//rvsl , zai , cnfrg , looot 
+axios.get('https://api.dexscreener.com/latest/dex/tokens/0x6aa3ecec75ceb388d2e929814ead4fc4cd0648fc,0xc2aeedc081d4cb6797a681e9403a82211f97b308,0xb6d78683a4e54b91031acb41510bd8e144fed025,0xe4129c7b229812212f88d1bd6a223c45622e6b85')
+    .then(response => {
+        const data = response.data ; 
+         
+        const loot = data.pairs[0].priceUsd ; 
+        const rvsl =  data.pairs[2].priceUsd ; 
+        const cnfrg =  data.pairs[3].priceUsd ;
+        const zai =  data.pairs[4].priceUsd ; 
+        const messages = [];
+
+        if (rvsl < 3) {
+            messages.push(client.messages.create({
+                body: 'sell rvsl  ',
+                from: '+16592183969',
+                to: `${phoneNumber}`
+            }));
+        }
+                    
+        if (zai < 0.03) {
+            messages.push(client.messages.create({
+                body: 'sell zai ',
+                from: '+16592183969',
+                to: `${phoneNumber}`
+            }));
+        }
+
+        if (cnfrg < 0.04) {
+            messages.push(client.messages.create({
+                body: 'sell cnfrg ',
+                from: '+16592183969',
+                to: `${phoneNumber}`
+            }));
+        }
+
+        if (loot < 100) {
+            messages.push(client.messages.create({
+                body: 'sell loot',
+                from: '+16592183969',
+                to: `${phoneNumber}`
+            }));
+        }
+
+        return Promise.all(messages);
+    })
+    .then(messages => {
+        messages.forEach(message => console.log(message.sid));
+    })
+    .catch(error => {
+        console.error(error);
+    });
+
+app.listen(port, () => {
+    console.log('app is running now');
+});
