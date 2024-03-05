@@ -51,7 +51,7 @@ axios.get('https://api.dexscreener.com/latest/dex/tokens/0x6aa3ecec75ceb388d2e92
         const sync = data.pairs[5].priceUsd; 
         const messages = [];
 
-        if (rvsl < 2.5 ) {
+        if (rvsl > 0.0004 ) {
             messages.push(client.messages.create({
                 body: 'sell rvsl , its over 3 million MC  ',
                 from: '+16592183969',
@@ -59,7 +59,7 @@ axios.get('https://api.dexscreener.com/latest/dex/tokens/0x6aa3ecec75ceb388d2e92
             }));
         }
                     
-        if (zai < 0.03) {
+        if (zai > 0.03) {
             messages.push(client.messages.create({
                 body: 'sell zai , ASAP , its over 3 million MC ',
                 from: '+16592183969',
