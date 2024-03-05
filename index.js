@@ -81,7 +81,7 @@ axios.get('https://api.dexscreener.com/latest/dex/tokens/0x6aa3ecec75ceb388d2e92
                 from: '+16592183969',
                 to: `${phoneNumber}`
             }));
-            
+        }
         if (sync > 1 ) {
             messages.push(client.messages.create({
                 body: 'sell loot , ASAP , its over 5 million MC ',
