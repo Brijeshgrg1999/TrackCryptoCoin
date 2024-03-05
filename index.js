@@ -7,7 +7,7 @@ const phoneNumber = '+85255997265';
 
 //twilio configuration 
 const accountSid = 'AC9fcb19b058be0e3b6c163f62f58b14cf';
-const authToken = '0675d5446d183606c7f23de0d1182e5b';
+const authToken = 'ca88fe6979ed07150eaacf4508c77896';
 
 const client = require('twilio')(accountSid, authToken);
 
@@ -59,7 +59,7 @@ axios.get('https://api.dexscreener.com/latest/dex/tokens/0x6aa3ecec75ceb388d2e92
             }));
         }
                     
-        if (zai > 0.03) {
+        if (zai < 0.03) {
             messages.push(client.messages.create({
                 body: 'sell zai , ASAP , its over 3 million MC ',
                 from: '+16592183969',
