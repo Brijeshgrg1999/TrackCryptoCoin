@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const port = 8080;
+const port = process.env.PORT || 8080;
 const axios = require('axios');
 
 const phoneNumber = '+85255997265';
@@ -40,43 +40,51 @@ const tokenAddress = '0x6aa3ecec75ceb388d2e929814ead4fc4cd0648fc';
 // });
 
 //rvsl , zai , cnfrg , looot 
-axios.get('https://api.dexscreener.com/latest/dex/tokens/0x6aa3ecec75ceb388d2e929814ead4fc4cd0648fc,0xc2aeedc081d4cb6797a681e9403a82211f97b308,0xb6d78683a4e54b91031acb41510bd8e144fed025,0xe4129c7b229812212f88d1bd6a223c45622e6b85')
+axios.get('https://api.dexscreener.com/latest/dex/tokens/0x6aa3ecec75ceb388d2e929814ead4fc4cd0648fc,0xc2aeedc081d4cb6797a681e9403a82211f97b308,0xb6d78683a4e54b91031acb41510bd8e144fed025,0xe4129c7b229812212f88d1bd6a223c45622e6b85 , 0x6e51293a4adbace0082067312cc0110e7dd33b2e')
     .then(response => {
         const data = response.data ; 
          
         const loot = data.pairs[0].priceUsd ; 
         const rvsl =  data.pairs[2].priceUsd ; 
         const cnfrg =  data.pairs[3].priceUsd ;
-        const zai =  data.pairs[4].priceUsd ; 
+        const zai =  data.pairs[4].priceUsd ;
+        const sync = data.pairs[5].priceUsd; 
         const messages = [];
 
-        if (rvsl < 3) {
+        if (rvsl > 2.5 ) {
             messages.push(client.messages.create({
-                body: 'sell rvsl  ',
+                body: 'sell rvsl , its over 3 million MC  ',
                 from: '+16592183969',
                 to: `${phoneNumber}`
             }));
         }
                     
-        if (zai < 0.03) {
+        if (zai > 0.03) {
             messages.push(client.messages.create({
-                body: 'sell zai ',
+                body: 'sell zai , ASAP , its over 3 million MC ',
                 from: '+16592183969',
                 to: `${phoneNumber}`
             }));
         }
 
-        if (cnfrg < 0.04) {
+        if (cnfrg > 0.03) {
             messages.push(client.messages.create({
-                body: 'sell cnfrg ',
+                body: 'sell cnfrg , ASAP , its over 3 million MC  ',
                 from: '+16592183969',
                 to: `${phoneNumber}`
             }));
         }
 
-        if (loot < 100) {
+        if (loot > 100) {
             messages.push(client.messages.create({
-                body: 'sell loot',
+                body: 'sell loot , ASAP , its over 5 million MC ',
+                from: '+16592183969',
+                to: `${phoneNumber}`
+            }));
+            
+        if (sync > 1 ) {
+            messages.push(client.messages.create({
+                body: 'sell loot , ASAP , its over 5 million MC ',
                 from: '+16592183969',
                 to: `${phoneNumber}`
             }));
