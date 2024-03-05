@@ -7,7 +7,7 @@ const phoneNumber = '+85255997265';
 
 //twilio configuration 
 const accountSid = 'AC9fcb19b058be0e3b6c163f62f58b14cf';
-const authToken = 'ca88fe6979ed07150eaacf4508c77896';
+const authToken = '72d38c421a36139749df23245b0342ed';
 
 const client = require('twilio')(accountSid, authToken);
 
