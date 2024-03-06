@@ -51,9 +51,9 @@ axios.get('https://api.dexscreener.com/latest/dex/tokens/0x6aa3ecec75ceb388d2e92
         const sync = data.pairs[5].priceUsd; 
         const messages = [];
 
-        if (rvsl > 3 ) {
+        if (rvsl > 2 ) {
             messages.push(client.messages.create({
-                body: 'sell rvsl , its over 3 million MC  ',
+                body: 'sell rvsl , its over 2 million MC  ',
                 from: '+16592183969',
                 to: `${phoneNumber}`
             }));
@@ -67,15 +67,15 @@ axios.get('https://api.dexscreener.com/latest/dex/tokens/0x6aa3ecec75ceb388d2e92
             }));
         }
 
-        if (cnfrg > 0.03) {
+        if (cnfrg > 0.02) {
             messages.push(client.messages.create({
-                body: 'sell cnfrg , ASAP , its over 3 million MC  ',
+                body: 'sell cnfrg , ASAP , its over 2 million MC  ',
                 from: '+16592183969',
                 to: `${phoneNumber}`
             }));
         }
 
-        if (loot > 100) {
+        if (loot > 150 ) {
             messages.push(client.messages.create({
                 body: 'sell loot , ASAP , its over 5 million MC ',
                 from: '+16592183969',
