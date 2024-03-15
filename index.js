@@ -67,7 +67,16 @@ axios.get('https://api.dexscreener.com/latest/dex/tokens/0x6aa3ecec75ceb388d2e92
             }));
         }
 
-        if (cnfrg > 0.0008) {
+        if (cnfrg > 0.001135) {
+            messages.push(client.messages.create({
+                body: 'sell cnfrg , ASAP , its over 2 million MC  ',
+                from: '+16592183969',
+                to: `${phoneNumber}`
+            }));
+        }
+
+        
+        if (cnfrg < 0.00113) {
             messages.push(client.messages.create({
                 body: 'sell cnfrg , ASAP , its over 2 million MC  ',
                 from: '+16592183969',
